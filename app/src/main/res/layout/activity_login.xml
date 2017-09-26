@@ -8,7 +8,7 @@
     android:background="@drawable/color_background"
     android:fitsSystemWindows="true"
     android:clipToPadding="true"
-    tools:context="com.flyyuan.contract_firm.LoginActivity">
+    tools:context="com.flyyuan.contract_firm.activity.LoginActivity">
     <View
         android:layout_width="match_parent"
         android:layout_height="50dp" />

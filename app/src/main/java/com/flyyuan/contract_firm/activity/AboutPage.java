@@ -1,4 +1,4 @@
-package com.flyyuan.contract_firm;
+package com.flyyuan.contract_firm.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

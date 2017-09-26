@@ -19,7 +19,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context="com.flyyuan.contract_firm.MainActivity">
+    tools:context="com.flyyuan.contract_firm.activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

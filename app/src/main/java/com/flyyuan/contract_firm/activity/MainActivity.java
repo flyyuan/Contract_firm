@@ -1,4 +1,4 @@
-package com.flyyuan.contract_firm;
+package com.flyyuan.contract_firm.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.flyyuan.contract_firm.R;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cookie.store.CookieStore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,16 +29,19 @@ public class MainActivity extends AppCompatActivity {
             R.mipmap.wait_contract,
             R.mipmap.already_get,
             R.mipmap.wait_look,
-            R.mipmap.already_contract,};
+            R.mipmap.already_contract,
+            R.mipmap.seal
+    };
 
     //定义图标下方的名称数组
     private String[] name = {
             "合同模板",
-            "合同样本",
+            "新建合同",
             "待签约",
-            "已发起",
             "待审核",
+            "已发起",
             "已签约",
+            "图章",
     };
 
     @Override
@@ -82,7 +88,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(MainActivity.this,name[position],Toast.LENGTH_LONG).show();
                 switch (position){
-                    case 0: startActivity(new Intent(MainActivity.this,GetContractSignActivity.class));
+                    case 0: startActivity(new Intent(MainActivity.this,ContractModelActivity.class));
+                        break;
+                    case 1:startActivity(new Intent(MainActivity.this,NewContractActivity.class));
+                        break;
                 }
             }
         });
@@ -104,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.startActivity(intent);
     }
     public void exitAPP(View view){
+        CookieStore cookieStore = OkGo.getInstance().getCookieJar().getCookieStore();
+        cookieStore.removeAllCookie();
         finish();
     }
 }

@@ -1,23 +1,24 @@
 package com.flyyuan.contract_firm.bean;
 
 /**
- * Created by Yuan on 2017/7/13.
+ * Created by Yuan on 2017/9/21.
  * class comment:
  */
 
-public class ContractSignBean {
-
+public class ContractModelBean {
     /**
-     * id : 3534e2f2494048488d360064c3a3217a
+     * id : 27ae87a201c94fb69508e08ee493b408
      * isNewRecord : false
-     * createDate : 2017-07-12 15:24:00
-     * updateDate : 2017-07-12 15:24:00
-     * name : 2017年劳动合同书范本.pdf
-     * url : /xxzx/userfiles/1/files/files/2017/07/2017年劳动合同书范本.pdf
+     * remarks :
+     * createDate : 2017-09-15 20:18:28
+     * updateDate : 2017-09-15 20:18:28
+     * name : 系统劳动合同(续签合同).pdf
+     * url : /ldht/userfiles/1/files/files/2017/09/系统劳动合同(续签合同).pdf
      */
 
     private String id;
     private boolean isNewRecord;
+    private String remarks;
     private String createDate;
     private String updateDate;
     private String name;
@@ -37,6 +38,14 @@ public class ContractSignBean {
 
     public void setIsNewRecord(boolean isNewRecord) {
         this.isNewRecord = isNewRecord;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public String getCreateDate() {

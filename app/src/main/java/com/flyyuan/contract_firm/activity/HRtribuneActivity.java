@@ -1,25 +1,27 @@
-package com.flyyuan.contract_firm;
+package com.flyyuan.contract_firm.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
+import com.flyyuan.contract_firm.R;
 import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
+import com.liuguangqiang.swipeback.SwipeBackActivity;
+import com.liuguangqiang.swipeback.SwipeBackLayout;
 
-public class HRFoundActivity extends AppCompatActivity {
+public class HRtribuneActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hrfound);
+        setContentView(R.layout.activity_hrtribune);
+        setDragEdge(SwipeBackLayout.DragEdge.LEFT);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("发现");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -30,7 +32,7 @@ public class HRFoundActivity extends AppCompatActivity {
         });
 
 
-        LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.hr_found);
+        LinearLayout mLinearLayout = (LinearLayout) findViewById(R.id.hr_tribune);
 
         ChromeClientCallbackManager.ReceivedTitleCallback mCallback = new ChromeClientCallbackManager.ReceivedTitleCallback() {
             @Override
@@ -44,7 +46,7 @@ public class HRFoundActivity extends AppCompatActivity {
                 .setReceivedTitleCallback(mCallback) //设置 Web 页面的 title 回调
                 .createAgentWeb()//
                 .ready()
-                .go("http://mobile.hroot.com/");
+                .go("http://bbs.xzhichang.com/forum.php");
     }
 
 }

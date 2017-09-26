@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/model_pdf"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.flyyuan.contract_firm.activity.HRClassActivity"
-    android:id="@+id/HRclass"
-    tools:showIn="@layout/activity_hrclass"
+    tools:context="com.flyyuan.contract_firm.activity.HRFoundActivity"
+    tools:showIn="@layout/activity_model_pdf"
     android:orientation="vertical">
 
 </LinearLayout>

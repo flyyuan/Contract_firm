@@ -15,37 +15,39 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
+        android:name=".GApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".GetContractSignActivity" />
-        <activity android:name=".GetIdActivity" />
-        <activity android:name=".TypeWorkActivity" />
-        <activity android:name=".AboutPage" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.AboutPage" />
         <activity android:name=".GetCompanyActivity" />
         <activity
-            android:name=".HRtribuneActivity"
+            android:name=".activity.HRtribuneActivity"
             android:label="@string/title_activity_hrtribune"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".HRFoundActivity"
+            android:name=".activity.HRFoundActivity"
             android:label="@string/title_activity_hrfound"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".HRClassActivity"
+            android:name=".activity.HRClassActivity"
             android:label="@string/title_activity_hrclass"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.ContractModelActivity" />
+        <activity android:name=".activity.ModelPDFActivity" />
+        <activity android:name=".activity.NewContractActivity" />
+        <activity android:name=".activity.ContractInformationActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.flyyuan.contract_firm;
+package com.flyyuan.contract_firm.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,15 +9,19 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
+import com.flyyuan.contract_firm.R;
 import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
+import com.liuguangqiang.swipeback.SwipeBackActivity;
+import com.liuguangqiang.swipeback.SwipeBackLayout;
 
-public class HRClassActivity extends AppCompatActivity {
+public class HRClassActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hrclass);
+        setDragEdge(SwipeBackLayout.DragEdge.LEFT);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
