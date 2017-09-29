@@ -22,6 +22,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.cookie.store.CookieStore;
 import com.lzy.okgo.model.Response;
+import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 
 
 import java.util.HashMap;
@@ -51,6 +52,7 @@ public class LoginActivity  extends AppCompatActivity {
     Button btnLogin;
     @BindView(R.id.remember_pass)
     CheckBox rememberPass;
+    private LoadingDialog ld;
 
 
     @Override
@@ -98,6 +100,7 @@ public class LoginActivity  extends AppCompatActivity {
 
     //点击登录按钮所执行的方法
     public void login(View v){
+
         String username = editText_username.getText() + "";
         String password = editText_pwd.getText() + "";
         String mobileLogin = "true";
@@ -163,6 +166,12 @@ public class LoginActivity  extends AppCompatActivity {
 //            }
 //
 //        });
+        //加载圈
+        ld = new LoadingDialog(this);
+        ld.setLoadingText("登录中")
+                .setSuccessText("登录成功")//显示加载成功时的文字
+                .setFailedText("登录失败，网络连接失败")
+                .show();
 
         OkGo.<String>post(LaborURL.login_URL)
                 .headers("User-Agent","Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/5.0; SLCC2;   \n" +
@@ -181,7 +190,7 @@ public class LoginActivity  extends AppCompatActivity {
                    @Override
                    public void onError(Response<String> response) {
                        super.onError(response);
-                       Toast.makeText(mContext,"网络连接不可用",Toast.LENGTH_SHORT).show();
+                      ld.loadFailed();
                    }
                });
 
@@ -198,7 +207,6 @@ public class LoginActivity  extends AppCompatActivity {
         if (cookies.toString().contains("deleteMe")){
             Toast.makeText(mContext,"账号或者密码错误",Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(mContext,"登录成功",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             LoginActivity.this.startActivity(intent);
             LoginActivity.this.finish();

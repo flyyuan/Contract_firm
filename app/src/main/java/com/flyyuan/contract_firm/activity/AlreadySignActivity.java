@@ -9,9 +9,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.flyyuan.contract_firm.R;
-import com.flyyuan.contract_firm.adapter.ContractModelAdapter;
-import com.flyyuan.contract_firm.adapter.NewContracAdapter;
-import com.flyyuan.contract_firm.bean.ContractModelBean;
+import com.flyyuan.contract_firm.adapter.AlreadyLaunchedAdapter;
+import com.flyyuan.contract_firm.adapter.AlreadySignAdapter;
+import com.flyyuan.contract_firm.bean.AlreadyLaunchedBean;
+import com.flyyuan.contract_firm.bean.AlreadySignBean;
 import com.flyyuan.contract_firm.network.LaborURL;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -25,41 +26,24 @@ import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewContractActivity extends AppCompatActivity {
+public class AlreadySignActivity extends AppCompatActivity {
 
-    private List<ContractModelBean> modelList = new ArrayList<>();
-    private RecyclerView recyclerView;
+    private static final String TAG = "AlreadySign";
+    RecyclerView recyclerView;
+    List<AlreadySignBean> alreadySignBeanList;
     private LoadingDialog ld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_contract);
-        initToolbar();
-        getModelJSon();
+        setContentView(R.layout.activity_already_sign);
+        initUI();
+        AlreadySignJSon();
     }
 
-    private void getModelJSon() {
-        OkGo.<String>get(LaborURL.model_URL)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        Log.d("model----->", response.body());
-                        initRecyclerView(response.body());
-                    }
-                    @Override
-                    public void onError(Response<String> response) {
-                        ld.loadFailed();
-                        super.onError(response);
-                    }
-
-                });
-
-    }
-
-    private void initToolbar(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.new_contract_toolbar);
-        toolbar.setTitle("选择合同模板");
+    private void initUI(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.already_sign_toolbar);
+        toolbar.setTitle("已签约");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -75,8 +59,27 @@ public class NewContractActivity extends AppCompatActivity {
                 .setFailedText("加载失败")
                 .show();
     }
+
+    private void AlreadySignJSon() {
+        OkGo.<String>get(LaborURL.alreadySign_URL)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Log.d("AlreadySign----->", response.body());
+                        initRecyclerView(response.body());
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        ld.loadFailed();
+                        super.onError(response);
+                    }
+                });
+
+    }
+
     private void initRecyclerView(String jsonData){
-        recyclerView = (RecyclerView) findViewById(R.id.new_model_list);
+        recyclerView = (RecyclerView) findViewById(R.id.already_sign_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -84,16 +87,19 @@ public class NewContractActivity extends AppCompatActivity {
         JsonParser parser = new JsonParser();
         JsonArray jsonArray = parser.parse(jsonData).getAsJsonArray();
         Gson gson = new Gson();
-        ArrayList<ContractModelBean> modelBeanList = new ArrayList<>();
-        for (JsonElement model : jsonArray){
-            ContractModelBean modelBean = gson.fromJson(model,ContractModelBean.class);
-            modelBeanList.add(modelBean);
+        ArrayList<AlreadySignBean> alreadySignArrayList = new ArrayList<>();
+        for (JsonElement already : jsonArray){
+            AlreadySignBean alreadySignBean = gson.fromJson(already,AlreadySignBean.class);
+            alreadySignArrayList.add(alreadySignBean);
 
         }
+        Log.d(TAG, "initRecyclerView: "+alreadySignArrayList.get(0).getLdhtTemplate().getName());
         //将数据传入RecyclerView adapter
-        modelList = modelBeanList;
-        NewContracAdapter adapter = new NewContracAdapter(modelList,NewContractActivity.this);
+        alreadySignBeanList = alreadySignArrayList;
+        AlreadySignAdapter adapter = new AlreadySignAdapter(alreadySignBeanList,AlreadySignActivity.this);
         recyclerView.setAdapter(adapter);
         ld.loadSuccess();
+
     }
-    }
+
+}

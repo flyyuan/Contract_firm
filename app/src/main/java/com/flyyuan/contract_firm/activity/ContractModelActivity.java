@@ -19,6 +19,8 @@ import com.google.gson.JsonParser;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class ContractModelActivity extends AppCompatActivity {
 
     private List<ContractModelBean> modelList = new ArrayList<>();
     private RecyclerView recyclerView;
+    private LoadingDialog ld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,12 @@ public class ContractModelActivity extends AppCompatActivity {
                        Log.d("model----->", response.body());
                        initRecyclerView(response.body());
                    }
+
+                   @Override
+                   public void onError(Response<String> response) {
+                       ld.loadFailed();
+                       super.onError(response);
+                   }
                });
                 
     }
@@ -59,6 +68,12 @@ public class ContractModelActivity extends AppCompatActivity {
                 finish();
             }
         });
+        //加载圈
+        ld = new LoadingDialog(this);
+        ld.setLoadingText("加载中")
+                .setSuccessText("加载成功")//显示加载成功时的文字
+                //.setFailedText("加载失败")
+                .show();
     }
     private void initRecyclerView(String jsonData){
         recyclerView = (RecyclerView) findViewById(R.id.model_list);
@@ -79,7 +94,7 @@ public class ContractModelActivity extends AppCompatActivity {
         modelList = modelBeanList;
         ContractModelAdapter adapter = new ContractModelAdapter(modelList,ContractModelActivity.this);
         recyclerView.setAdapter(adapter);
-
+        ld.loadSuccess();
     }
 
     //解析JSON数组

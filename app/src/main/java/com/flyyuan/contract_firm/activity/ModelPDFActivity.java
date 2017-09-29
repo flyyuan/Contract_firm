@@ -51,6 +51,7 @@ public class ModelPDFActivity extends AppCompatActivity {
                 .setReceivedTitleCallback(mCallback) //设置 Web 页面的 title 回调
                 .createAgentWeb()//
                 .ready()
+                //通过第三方网站解析PDF
                 .go("http://ow365.cn/?i=13726&furl=http://39.108.69.214:8080"+PDFURL);
     }
 

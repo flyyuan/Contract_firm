@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
         SimpleAdapter saImageItems = new SimpleAdapter(this,
                 lstImageItem,//数据来源
                 R.layout.homemenu_item,//item的XML实现
-
                 //动态数组与ImageItem对应的子项
                 new String[]{"ItemImage", "ItemText"},
 
                 //ImageItem的XML文件里面的一个ImageView,两个TextView ID
                 new int[]{R.id.img_homemenuitem, R.id.txt_homemenuitem});
+
         //添加并且显示
         gridview.setAdapter(saImageItems);
         //添加消息处理
@@ -91,6 +91,16 @@ public class MainActivity extends AppCompatActivity {
                     case 0: startActivity(new Intent(MainActivity.this,ContractModelActivity.class));
                         break;
                     case 1:startActivity(new Intent(MainActivity.this,NewContractActivity.class));
+                        break;
+                    case 2: startActivity(new Intent(MainActivity.this,PendingContractActivity.class));
+                        break;
+                    case 3: startActivity(new Intent(MainActivity.this,VouchActivity.class));
+                        break;
+                    case 4:startActivity(new Intent(MainActivity.this,AlreadyLaunchedActivity.class));
+                        break;
+                    case 5:startActivity(new Intent(MainActivity.this,AlreadySignActivity.class));
+                        break;
+                    case 6: startActivity(new Intent(MainActivity.this,SealActivity.class));
                         break;
                 }
             }

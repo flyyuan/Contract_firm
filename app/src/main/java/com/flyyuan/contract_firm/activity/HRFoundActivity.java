@@ -15,13 +15,12 @@ import com.just.library.ChromeClientCallbackManager;
 import com.liuguangqiang.swipeback.SwipeBackActivity;
 import com.liuguangqiang.swipeback.SwipeBackLayout;
 
-public class HRFoundActivity extends SwipeBackActivity {
+public class HRFoundActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hrfound);
-        setDragEdge(SwipeBackLayout.DragEdge.LEFT);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("发现");
         setSupportActionBar(toolbar);

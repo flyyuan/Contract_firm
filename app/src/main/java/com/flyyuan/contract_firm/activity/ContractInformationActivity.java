@@ -110,8 +110,6 @@ public class ContractInformationActivity extends AppCompatActivity implements Vi
         ButterKnife.bind(this);
         initToolbar();
         initUserInfo();
-        getContractinfo();
-
     }
 
 
@@ -280,6 +278,8 @@ public class ContractInformationActivity extends AppCompatActivity implements Vi
 
     //保存合同
     public void postSaveContract(View view){
+        getContractinfo();
+        Log.e(TAG, "postSaveContract: "+companyName);
         OkGo.<String>post(LaborURL.postSaveContract_URL)
                 .params("ldhtTemplate.id",modelId)
                 .params("partyaid",userAid)
@@ -325,6 +325,7 @@ public class ContractInformationActivity extends AppCompatActivity implements Vi
 
     //直接发起合同
     public void postNewContract(View view){
+        getContractinfo();
         OkGo.<String>post(LaborURL.postSaveContract_URL)
                 .params("ldhtTemplate.id",modelId)
                 .params("partyaid",userAid)

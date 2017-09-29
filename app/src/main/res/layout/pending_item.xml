@@ -13,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="160dp"
         android:orientation="vertical"
         android:background="@color/itemColor"
         >
@@ -23,7 +23,14 @@
         <TextView
             android:textSize="20dp"
             android:textColor="@color/about_github_color"
-            android:id="@+id/modelname"
+            android:id="@+id/Aname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Model" />
+        <TextView
+            android:textSize="20dp"
+            android:textColor="@color/about_github_color"
+            android:id="@+id/Bname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Model" />

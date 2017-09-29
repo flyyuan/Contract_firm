@@ -47,7 +47,12 @@
         <activity android:name=".activity.ContractModelActivity" />
         <activity android:name=".activity.ModelPDFActivity" />
         <activity android:name=".activity.NewContractActivity" />
-        <activity android:name=".activity.ContractInformationActivity"></activity>
+        <activity android:name=".activity.ContractInformationActivity" />
+        <activity android:name=".activity.PendingContractActivity" />
+        <activity android:name=".activity.SealActivity" />
+        <activity android:name=".activity.AlreadyLaunchedActivity" />
+        <activity android:name=".activity.AlreadySignActivity" />
+        <activity android:name=".activity.VouchActivity"></activity>
     </application>
 
 </manifest>

@@ -9,9 +9,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.flyyuan.contract_firm.R;
-import com.flyyuan.contract_firm.adapter.ContractModelAdapter;
 import com.flyyuan.contract_firm.adapter.NewContracAdapter;
+import com.flyyuan.contract_firm.adapter.PendingAdapter;
 import com.flyyuan.contract_firm.bean.ContractModelBean;
+import com.flyyuan.contract_firm.bean.PendingBean;
 import com.flyyuan.contract_firm.network.LaborURL;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -25,41 +26,23 @@ import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewContractActivity extends AppCompatActivity {
+public class PendingContractActivity extends AppCompatActivity {
 
-    private List<ContractModelBean> modelList = new ArrayList<>();
-    private RecyclerView recyclerView;
+    private static final String TAG = "Pending:-->";
+    private RecyclerView recyclerView ;
+    private List<PendingBean> pendingList = new ArrayList<>();
     private LoadingDialog ld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_contract);
+        setContentView(R.layout.activity_pending_contract);
         initToolbar();
-        getModelJSon();
+        getPendingJSon();
     }
-
-    private void getModelJSon() {
-        OkGo.<String>get(LaborURL.model_URL)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        Log.d("model----->", response.body());
-                        initRecyclerView(response.body());
-                    }
-                    @Override
-                    public void onError(Response<String> response) {
-                        ld.loadFailed();
-                        super.onError(response);
-                    }
-
-                });
-
-    }
-
     private void initToolbar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.new_contract_toolbar);
-        toolbar.setTitle("选择合同模板");
+        toolbar.setTitle("待签约");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -75,8 +58,26 @@ public class NewContractActivity extends AppCompatActivity {
                 .setFailedText("加载失败")
                 .show();
     }
+
+    private void getPendingJSon() {
+        OkGo.<String>get(LaborURL.pendingContract_URL)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Log.d("pending----->", response.body());
+                        initRecyclerView(response.body());
+                    }
+                    @Override
+                    public void onError(Response<String> response) {
+                        ld.loadFailed();
+                        super.onError(response);
+                    }
+                });
+
+    }
+
     private void initRecyclerView(String jsonData){
-        recyclerView = (RecyclerView) findViewById(R.id.new_model_list);
+        recyclerView = (RecyclerView) findViewById(R.id.pending_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -84,16 +85,17 @@ public class NewContractActivity extends AppCompatActivity {
         JsonParser parser = new JsonParser();
         JsonArray jsonArray = parser.parse(jsonData).getAsJsonArray();
         Gson gson = new Gson();
-        ArrayList<ContractModelBean> modelBeanList = new ArrayList<>();
-        for (JsonElement model : jsonArray){
-            ContractModelBean modelBean = gson.fromJson(model,ContractModelBean.class);
-            modelBeanList.add(modelBean);
+        ArrayList<PendingBean> pendingBeanArrayList = new ArrayList<>();
+        for (JsonElement pending : jsonArray){
+            PendingBean pendingBean = gson.fromJson(pending,PendingBean.class);
+            pendingBeanArrayList.add(pendingBean);
 
         }
+        Log.d(TAG, "initRecyclerView: "+pendingBeanArrayList.get(0).getLdhtTemplate().getName());
         //将数据传入RecyclerView adapter
-        modelList = modelBeanList;
-        NewContracAdapter adapter = new NewContracAdapter(modelList,NewContractActivity.this);
+        pendingList = pendingBeanArrayList;
+        PendingAdapter adapter = new PendingAdapter(pendingList,PendingContractActivity.this);
         recyclerView.setAdapter(adapter);
         ld.loadSuccess();
     }
-    }
+}

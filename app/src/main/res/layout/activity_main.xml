@@ -9,7 +9,8 @@
     android:clipToPadding="false"
     app:edPosition="1"
     app:edMenuSize="280dp"
-    app:edMenuBackground="#dddddd">
+    app:edMenuBackground="#dddddd"
+    >
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,9 +18,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@mipmap/background_main10"
     android:orientation="vertical"
-    tools:context="com.flyyuan.contract_firm.activity.MainActivity">
+    tools:context="com.flyyuan.contract_firm.activity.MainActivity"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -51,8 +53,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
             android:src="@mipmap/googlelogo"
             app:civ_border_width="2dp"
             app:civ_border_color="#fffcfc"/>

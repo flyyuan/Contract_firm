@@ -14,13 +14,12 @@ import com.just.library.ChromeClientCallbackManager;
 import com.liuguangqiang.swipeback.SwipeBackActivity;
 import com.liuguangqiang.swipeback.SwipeBackLayout;
 
-public class HRtribuneActivity extends SwipeBackActivity {
+public class HRtribuneActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hrtribune);
-        setDragEdge(SwipeBackLayout.DragEdge.LEFT);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
